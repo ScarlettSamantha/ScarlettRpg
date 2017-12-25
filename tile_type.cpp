@@ -21,10 +21,12 @@ string TileType::convertColor()
     {
         default:
             return helpers::constants::cli::COLOR_DEFAULT;
+        case 0:
+            return helpers::constants::cli::COLOR_RED;
         case 1:
             return helpers::constants::cli::COLOR_GREEN;
         case 2:
-            return helpers::constants::cli::COLOR_RED;
+            return helpers::constants::cli::COLOR_WHITE;
     }
 }
 
@@ -35,6 +37,8 @@ char TileType::convertNumber()
         default:
             return '0';
             //Mounten
+        case 0:
+            return 'P';
         case 1:
             return '.';
             //Grass

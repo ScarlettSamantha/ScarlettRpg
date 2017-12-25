@@ -17,6 +17,10 @@ public:
     int getRowSize();
     int getHeight();
     int getWidth();
+    Tile * getMiddleTile_ptr(int mode /* MIDDLE_MODE_DOWN */);
+
+    const static int MIDDLE_MODE_UP = 0;
+    const static int MIDDLE_MODE_DOWN = 1;
 private:
     int _rowLength = 0;
     int _height = 0;

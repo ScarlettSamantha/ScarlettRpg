@@ -4,14 +4,28 @@
 
 #include "Game.h"
 #include "renderers/cli/Render.h"
+#include "Player.h"
 
 #include <utility>
 #include <cstdlib>
+#include <iostream>
 
 void Game::init() {
     this->_map = this->getWorld_ptr()->getMap_ptr();
+    this->_objectList = this->getWorld_ptr()->getObjects_ptr();
+
     this->_render.setWorld_ptr(this->getWorld_ptr());
     this->_render.start();
+
+    Tile * player_Start_Tile = this->_map->getMiddleTile_ptr(Map::MIDDLE_MODE_UP);
+
+    //Check if player spawn tile is clear
+    auto * p = new MapObject();
+    p->setName("Z");
+    this->getWorld_ptr()->addObject("player", *p);
+    this->getWorld_ptr()->placeObject(this->getMap_ptr()->getMiddleTile_ptr(Map::MIDDLE_MODE_UP), this->getWorld_ptr()->getObject_ptr("player"));
+
+
 }
 
 void Game::start() {
@@ -28,9 +42,15 @@ void Game::loop() {
 void Game::tick()
 {
     this->_render.tick();
-    TileType t = TileType();
-    t.number = rand() % 10 + 1;
-    this->_map->getVectorMap()->at(25).setType(t);
+    //auto r = this->getWorld_ptr()->getObject("player");
+    /*
+    if (r.size() > 0)
+    {
+        auto it = r.begin();
+        std::advance(it, 0);
+        cout << it->getName();
+        // 'it' points to the element at index 'N'
+    }*/
 }
 
 void Game::stop() {

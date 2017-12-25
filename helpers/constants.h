@@ -16,9 +16,11 @@ namespace helpers::constants{
         static const string RESET_POINTER;
         static const string CURSOR_OFF;
         static const string CURSOR_ON;
+
         static const string COLOR_DEFAULT;
         static const string COLOR_GREEN;
         static const string COLOR_RED;
+        static const string COLOR_WHITE;
     };
 
     class tick

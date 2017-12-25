@@ -29,4 +29,28 @@ void Tile::setCordinates(std::tuple<int, int> c)
 std::tuple<int, int> Tile::cordinates()
 {
     return {this->_x, this->_y};
+}
+
+MapObject Tile::getObject() {
+    return * this->object;
+}
+
+MapObject *Tile::getObject_ptr() {
+    return this->object;
+}
+
+MapObject Tile::contains() {
+    return this->getObject();
+}
+
+bool Tile::empty() {
+    return this->object == nullptr;
+}
+
+void Tile::setObject(MapObject *mapObject) {
+    this->object = mapObject;
+}
+
+TileType *Tile::getType_ptr() {
+    return & this->_type;
 };

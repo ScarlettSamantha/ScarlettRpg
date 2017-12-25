@@ -12,6 +12,7 @@ namespace helpers::constants {
     const string cli::COLOR_DEFAULT = "\e[39m";
     const string cli::COLOR_GREEN = "\e[32m";
     const string cli::COLOR_RED = "\e[31m";
+    const string cli::COLOR_WHITE = "\e[97m";
 
 
 

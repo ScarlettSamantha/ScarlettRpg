@@ -5,6 +5,7 @@
 #include <stdint-gcc.h>
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "map.h"
 #include "tile.h"
 
@@ -16,7 +17,7 @@ Map::Map(uint32_t size_x = 25, uint32_t size_y = 25) {
         for (int y = 0; y < this->getWidth(); y++) {
             Tile t(x, y);
             TileType tt;
-            tt.number = rand() % 1 + 2;
+            tt.number = 1;
             t.setType(tt);
             _data.push_back(t);
         }
@@ -38,4 +39,18 @@ int Map::getWidth() {
 
 int Map::getRowSize(){
     return this->getWidth();
+}
+
+Tile *Map::getMiddleTile_ptr(int mode=MIDDLE_MODE_DOWN) {
+    uint32_t m_height;
+    uint32_t m_width;
+    if(mode == MIDDLE_MODE_DOWN)
+    {
+        m_height = (uint32_t) floor(this->getHeight() / 2) * this->getWidth();
+        m_width = (uint32_t) floor(this->getWidth() / 2);
+    } else {
+        m_height = (uint32_t) ceil(this->getHeight() / 2) * this->getWidth();
+        m_width = (uint32_t) ceil(this->getWidth() / 2);
+    }
+    return & this->getVectorMap()->at(m_height + m_width);
 }

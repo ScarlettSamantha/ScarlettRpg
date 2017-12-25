@@ -28,7 +28,15 @@ namespace Renderers::Cli {
     void Render::tick() {
         std::cout << helpers::constants::cli::RESET_POINTER;
         for (int i = 1; i - 1 != _vct->size(); i++) {
-            std::cout << _vct->at(static_cast<unsigned long>(i-1)).getType().display();
+
+            Tile t = _vct->at(static_cast<unsigned long>(i-1));
+
+            if(t.empty()) {
+                std::cout << t.getType_ptr()->display();
+            } else {
+                std::string r = t.getObject_ptr()->getName();
+            }
+
             if (i % _map->getRowSize() == 0) {
                 std::cout << '\n';
             }
