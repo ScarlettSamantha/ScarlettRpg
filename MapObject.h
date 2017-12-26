@@ -7,12 +7,26 @@
 
 #include <string>
 
+class Tile;
+
 class MapObject {
 public:
-    std::string getName();
+    explicit MapObject(const std::string &name = "", const std::string &title = "");
+    virtual std::string * getName();
     void setName(std::string name);
+    Tile * getTile();
+    void setTile(Tile * tile);
+    void clearTile();
+    bool isPlaced();
+
+    void preRemoval();
+    void preMove();
 private:
     std::string object_name;
+    std::string object_title;
+    Tile * tile;
+
+
 };
 
 

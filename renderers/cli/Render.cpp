@@ -6,6 +6,7 @@
 #include <cmath>
 #include "Render.h"
 #include "../../helpers/constants.h"
+#include "../../Input.h"
 
 namespace Renderers::Cli {
 
@@ -23,6 +24,7 @@ namespace Renderers::Cli {
         _vct = _map->getVectorMap();
         std::cout << helpers::constants::cli::CLEAR_TERM;
         std::cout << helpers::constants::cli::CURSOR_OFF;
+        Input::set_conio_terminal_mode();
     }
 
     void Render::tick() {
@@ -31,14 +33,15 @@ namespace Renderers::Cli {
 
             Tile t = _vct->at(static_cast<unsigned long>(i-1));
 
-            if(t.empty()) {
+            if(t.isEmpty()) {
                 std::cout << t.getType_ptr()->display();
             } else {
-                std::string r = t.getObject_ptr()->getName();
+                std::string r = * t.getObject_ptr()->getName();
+                std::cout << r;
             }
 
             if (i % _map->getRowSize() == 0) {
-                std::cout << '\n';
+                std::cout << "\n\r";
             }
         }
     }

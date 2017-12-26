@@ -50,10 +50,30 @@ void World::addObject(string key, MapObject mo)
 
 void World::deleteObject(string key)
 {
+    this->getObject_ptr(key)->preRemoval();
     this->_objectList.erase(key);
 }
 
 void World::placeObject(Tile *tile, MapObject *mapObject) {
+    mapObject->setTile(tile);
     tile->setObject(mapObject);
 }
 
+void World::moveObject(string key, Tile *to) {
+    MapObject * mo = this->getObject_ptr(std::move(key));
+    this->displaceObject(mo);
+    this->placeObject(to, mo);
+}
+
+void World::displaceObjectFromTile(Tile *tile) {
+    this->displaceObject(tile->getObject_ptr());
+}
+
+void World::displaceObject(MapObject *object) {
+    object->preMove();
+}
+
+Tile * World::getTileFromPosition(Tile *tile, int direction, int distance)
+{
+
+}

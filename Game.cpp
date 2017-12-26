@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "renderers/cli/Render.h"
 #include "Player.h"
+#include "Input.h"
 
 #include <utility>
 #include <cstdlib>
@@ -18,14 +19,10 @@ void Game::init() {
     this->_render.start();
 
     Tile * player_Start_Tile = this->_map->getMiddleTile_ptr(Map::MIDDLE_MODE_UP);
-
+    MapObject player = MapObject("x","x");
     //Check if player spawn tile is clear
-    auto * p = new MapObject();
-    p->setName("Z");
-    this->getWorld_ptr()->addObject("player", *p);
-    this->getWorld_ptr()->placeObject(this->getMap_ptr()->getMiddleTile_ptr(Map::MIDDLE_MODE_UP), this->getWorld_ptr()->getObject_ptr("player"));
-
-
+    this->getWorld_ptr()->addObject("player", player);
+    this->getWorld_ptr()->placeObject(player_Start_Tile, this->getWorld_ptr()->getObject_ptr("player"));
 }
 
 void Game::start() {
@@ -36,6 +33,20 @@ void Game::loop() {
     while(this->continue_main_loop)
     {
         this->tick();
+        if(Input::kbhit()) {
+            switch (Input::getch()) {
+                //W
+                case 87:
+
+                //Q
+                case 81:
+                    //this->continue_main_loop = false;
+                    break;
+                default:
+                    cout << Input::getch();
+                    break;
+            }
+        }
     }
 }
 

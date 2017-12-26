@@ -14,6 +14,11 @@
 class World
 {
 public:
+    static const int DIRECTION_UP = 0;
+    static const int DIRECTION_RIGHT = 1;
+    static const int DIRECTION_DOWN = 2;
+    static const int DIRECTION_LEFT = 3;
+public:
     //Constructor.
     explicit World(Map m) : _map(std::move(m)){};
 
@@ -23,6 +28,9 @@ public:
     MapObject getObject(string key);
     MapObject *getObject_ptr(string key);
     void placeObject(Tile *tile, MapObject *mapObject);
+    void displaceObjectFromTile(Tile *tile );
+    void displaceObject(MapObject *object);
+    void moveObject(string key, Tile* to);
     std::map<string, MapObject> * getObjects_ptr();
     std::map<string, MapObject> getObjects();
 
@@ -32,6 +40,7 @@ public:
     void setMap(Map m);
     uint32_t getWorldSize();
 
+    Tile * getTileFromPosition(Tile *tile, int direction = DIRECTION_UP, int distance = 1);
 protected:
     Map _map;
     map<string, MapObject> _objectList{};

@@ -4,7 +4,7 @@
 
 #include <tuple>
 #include "tile.h"
-#include "tile_type.h"
+#include "MapObject.h"
 
 Tile::Tile(int x, int y) {
     _x = x;
@@ -43,7 +43,12 @@ MapObject Tile::contains() {
     return this->getObject();
 }
 
-bool Tile::empty() {
+void Tile::clear()
+{
+     this->object = nullptr;
+}
+
+bool Tile::isEmpty() {
     return this->object == nullptr;
 }
 

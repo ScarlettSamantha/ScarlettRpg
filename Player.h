@@ -8,8 +8,11 @@
 #include "Actor.h"
 
 class Player : public Actor {
+public:
+    std::string * getName() override;
 private:
     std::string object_name = "player";
+    std::string object_title = "Player";
 };
 
 
